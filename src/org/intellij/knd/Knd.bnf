@@ -1,0 +1,20 @@
+{
+  parserClass="org.intellij.knd.parser.KndParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Knd"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.intellij.knd.psi"
+  psiImplPackage="org.intellij.knd.psi.impl"
+
+  elementTypeHolderClass="org.intellij.knd.psi.KndTypes"
+  elementTypeClass="org.intellij.knd.psi.KndElementType"
+  tokenTypeClass="org.intellij.knd.psi.KndTokenType"
+}
+
+defFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

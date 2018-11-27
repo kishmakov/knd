@@ -1,0 +1,31 @@
+<idea-plugin>
+  <id>org.intellij.knd</id>
+  <name>Kotlin/Native definition</name>
+  <version>0.1</version>
+  <vendor email="shmakir@yandex.ru">Kirill Shmakov</vendor>
+
+  <description><![CDATA[
+      Highlighting and support for Kotlin/Native definition files.
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Initiated.
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="173.0"/>
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="org.intellij.knd.KndFileTypeFactory"/>
+    <lang.parserDefinition language="KND" implementationClass="org.intellij.knd.KndParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="KND" implementationClass="org.intellij.knd.KndSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="org.intellij.knd.KndColorSettingsPage"/>
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
