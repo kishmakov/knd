@@ -23,8 +23,17 @@ public class KndParser implements PsiParser, LightPsiParser {
     boolean r;
     b = adapt_builder_(t, b, this, null);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
-    if (t == PROPERTY) {
-      r = property(b, 0);
+    if (t == C_END) {
+      r = C_END(b, 0);
+    }
+    else if (t == DEF_BEGIN) {
+      r = DEF_BEGIN(b, 0);
+    }
+    else if (t == DEF_DEFINITION) {
+      r = DEF_DEFINITION(b, 0);
+    }
+    else if (t == DEF_KEY) {
+      r = DEF_KEY(b, 0);
     }
     else {
       r = parse_root_(t, b, 0);
@@ -33,69 +42,134 @@ public class KndParser implements PsiParser, LightPsiParser {
   }
 
   protected boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-    return defFile(b, l + 1);
+    return ROOT(b, l + 1);
   }
 
   /* ********************************************************** */
-  // item_*
-  static boolean defFile(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "defFile")) return false;
+  // DIGIT*
+  public static boolean C_END(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "C_END")) return false;
+    Marker m = enter_section_(b, l, _NONE_, C_END, "<c end>");
     while (true) {
       int c = current_position_(b);
-      if (!item_(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "defFile", c)) break;
+      if (!consumeToken(b, DIGIT)) break;
+      if (!empty_element_parsed_guard_(b, "C_END", c)) break;
     }
+    exit_section_(b, l, m, true, false, null);
     return true;
   }
 
   /* ********************************************************** */
-  // property|COMMENT|CRLF
-  static boolean item_(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "item_")) return false;
-    boolean r;
-    r = property(b, l + 1);
-    if (!r) r = consumeToken(b, COMMENT);
-    if (!r) r = consumeToken(b, CRLF);
-    return r;
+  // def_item_*
+  public static boolean DEF_BEGIN(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_BEGIN")) return false;
+    Marker m = enter_section_(b, l, _NONE_, DEF_BEGIN, "<def begin>");
+    while (true) {
+      int c = current_position_(b);
+      if (!def_item_(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "DEF_BEGIN", c)) break;
+    }
+    exit_section_(b, l, m, true, false, null);
+    return true;
   }
 
   /* ********************************************************** */
-  // (KEY? SEPARATOR VALUE?) | KEY
-  public static boolean property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property")) return false;
-    if (!nextTokenIs(b, "<property>", KEY, SEPARATOR)) return false;
+  // DEF_KEY DEF_SEPARATOR DEF_VALUE
+  public static boolean DEF_DEFINITION(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_DEFINITION")) return false;
+    if (!nextTokenIs(b, "<def definition>", DEF_KEY_KNOWN, DEF_KEY_UNKNOWN)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PROPERTY, "<property>");
-    r = property_0(b, l + 1);
-    if (!r) r = consumeToken(b, KEY);
+    Marker m = enter_section_(b, l, _NONE_, DEF_DEFINITION, "<def definition>");
+    r = DEF_KEY(b, l + 1);
+    r = r && consumeTokens(b, 0, DEF_SEPARATOR, DEF_VALUE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // KEY? SEPARATOR VALUE?
-  private static boolean property_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0")) return false;
+  /* ********************************************************** */
+  // (DEF_KEY_KNOWN | DEF_KEY_UNKNOWN) (DEF_DOT DEF_PLATFORM)?
+  public static boolean DEF_KEY(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_KEY")) return false;
+    if (!nextTokenIs(b, "<def key>", DEF_KEY_KNOWN, DEF_KEY_UNKNOWN)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DEF_KEY, "<def key>");
+    r = DEF_KEY_0(b, l + 1);
+    r = r && DEF_KEY_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // DEF_KEY_KNOWN | DEF_KEY_UNKNOWN
+  private static boolean DEF_KEY_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_KEY_0")) return false;
+    boolean r;
+    r = consumeToken(b, DEF_KEY_KNOWN);
+    if (!r) r = consumeToken(b, DEF_KEY_UNKNOWN);
+    return r;
+  }
+
+  // (DEF_DOT DEF_PLATFORM)?
+  private static boolean DEF_KEY_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_KEY_1")) return false;
+    DEF_KEY_1_0(b, l + 1);
+    return true;
+  }
+
+  // DEF_DOT DEF_PLATFORM
+  private static boolean DEF_KEY_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DEF_KEY_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = property_0_0(b, l + 1);
-    r = r && consumeToken(b, SEPARATOR);
-    r = r && property_0_2(b, l + 1);
+    r = consumeTokens(b, 0, DEF_DOT, DEF_PLATFORM);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // KEY?
-  private static boolean property_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0_0")) return false;
-    consumeToken(b, KEY);
+  /* ********************************************************** */
+  // DEF_BEGIN (DELIM C_END?)?
+  static boolean ROOT(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ROOT")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = DEF_BEGIN(b, l + 1);
+    r = r && ROOT_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (DELIM C_END?)?
+  private static boolean ROOT_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ROOT_1")) return false;
+    ROOT_1_0(b, l + 1);
     return true;
   }
 
-  // VALUE?
-  private static boolean property_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0_2")) return false;
-    consumeToken(b, VALUE);
+  // DELIM C_END?
+  private static boolean ROOT_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ROOT_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DELIM);
+    r = r && ROOT_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // C_END?
+  private static boolean ROOT_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ROOT_1_0_1")) return false;
+    C_END(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // DEF_DEFINITION | DEF_COMMENT
+  static boolean def_item_(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "def_item_")) return false;
+    boolean r;
+    r = DEF_DEFINITION(b, l + 1);
+    if (!r) r = consumeToken(b, DEF_COMMENT);
+    return r;
   }
 
 }

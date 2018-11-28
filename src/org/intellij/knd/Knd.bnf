@@ -13,8 +13,16 @@
   tokenTypeClass="org.intellij.knd.psi.KndTokenType"
 }
 
-defFile ::= item_*
+ROOT ::= DEF_BEGIN (DELIM C_END?)?
 
-private item_ ::= (property|COMMENT|CRLF)
+DEF_BEGIN ::= def_item_*
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+private def_item_ ::= DEF_DEFINITION | DEF_COMMENT
+
+DEF_DEFINITION ::= DEF_KEY DEF_SEPARATOR DEF_VALUE
+
+DEF_KEY ::= (DEF_KEY_KNOWN | DEF_KEY_UNKNOWN) (DEF_DOT DEF_PLATFORM)?
+
+C_END ::= DIGIT*
+
+

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class KndParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-    public static final TokenSet COMMENTS = TokenSet.create(KndTypes.COMMENT);
+    public static final TokenSet COMMENTS = TokenSet.create(KndTypes.DEF_COMMENT);
 
     public static final IFileElementType FILE = new IFileElementType(KndLanguage.INSTANCE);
 
