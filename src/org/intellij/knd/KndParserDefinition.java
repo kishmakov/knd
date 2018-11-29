@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class KndParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
     public static final TokenSet COMMENTS = TokenSet.create(KndTypes.COMMENT);
+    public static final TokenSet STRING_LITERALS = TokenSet.create(KndTypes.C_STRING_LITERAL);
 
     public static final IFileElementType FILE = new IFileElementType(KndLanguage.INSTANCE);
 
@@ -33,7 +34,7 @@ public class KndParserDefinition implements ParserDefinition {
 
     @NotNull
     public TokenSet getStringLiteralElements() {
-        return TokenSet.EMPTY;
+        return STRING_LITERALS;
     }
 
     @NotNull

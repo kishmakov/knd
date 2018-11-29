@@ -15,13 +15,13 @@ static inline int square(int arg) {
     return arg * arg;
 }
 
-/* Online traditional comment */
+/* Oneline traditional comment. */
 
 static inline int cube(int arg) {
     return arg * arg * arg;
 }
 
-// Oneline linear comment
+// Oneline linear comment.
 
 static inline int doubling(int arg) {
     return 2 * arg;

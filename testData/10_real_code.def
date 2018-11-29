@@ -8,7 +8,7 @@ linkerOpts.linux = -L/usr/lib/x86_64-linux-gnu -lcurl
 ---
 
 struct UI128 {
-    size_t data[2];
+    long data[2];
 };
 
 // Rename of MurmurHash3_x64_128 from Austin Appleby,

@@ -10,9 +10,11 @@ import java.util.Map;
 
 public class KndColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Key", KndSyntaxHighlighter.KEY),
-            new AttributesDescriptor("Separator", KndSyntaxHighlighter.SEPARATOR),
-            new AttributesDescriptor("Value", KndSyntaxHighlighter.VALUE),
+            new AttributesDescriptor("Comments", KndSyntaxHighlighter.COMMENT),
+            new AttributesDescriptor("Def keywords", KndSyntaxHighlighter.DEF_KEYWORD),
+            new AttributesDescriptor("Def value", KndSyntaxHighlighter.DEF_VALUE),
+            new AttributesDescriptor("C keywords", KndSyntaxHighlighter.C_KEYWORD),
+            new AttributesDescriptor("Operators", KndSyntaxHighlighter.OPERATOR),
     };
 
     @Nullable
