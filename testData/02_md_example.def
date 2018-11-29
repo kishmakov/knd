@@ -1,0 +1,3 @@
+headers = OpenGL/gl.h OpenGL/glu.h GLUT/glut.h
+compilerOpts = -framework OpenGL -framework GLUT
+excludeDependentModules = true

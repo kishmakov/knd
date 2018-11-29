@@ -1,0 +1,7 @@
+headers = errno.h
+
+---
+
+static inline int getErrno() {
+    return errno;
+}

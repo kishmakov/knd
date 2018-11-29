@@ -1,0 +1,2 @@
+compilerOpts = -DFOO=bar
+linkerOpts = -lpng

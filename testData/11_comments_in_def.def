@@ -1,0 +1,8 @@
+! included headers
+headers = curl/curl.h fribidi/fribidi.h
+
+# selected headerFilter
+headerFilter = curl/* fribidi/fribidi-bidi*.h
+
+
+

@@ -1,0 +1,19 @@
+headers = \
+    curl/curl.h \
+    fribidi/fribidi.h \
+    boost/optional.hpp
+
+
+headerFilter= \
+    boost/optional.hpp \
+    curl/* \
+    fribidi/*
+
+compilerOpts.linux = -I/usr/include -I/usr/include/x86_64-linux-gnu
+compilerOpts.windows = -IC:\Libs\boost
+
+---
+
+const char * Str = "123"
+                   "456"
+                   "789";

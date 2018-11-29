@@ -1,0 +1,7 @@
+headers = library/base.h
+
+---
+
+static inline int foo(int arg) {
+    return FOO(arg);
+}

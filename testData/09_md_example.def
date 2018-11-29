@@ -1,0 +1,12 @@
+excludedFunctions = sin cos
+strictEnums = CoolEnum GoodEnum
+nonStrictEnums = BadEnum AwfulEnum
+noStringConversion = strlen
+
+message = Welcome to \
+          Wikipedia!
+
+tab : \u0009
+website = http://en.wikipedia.org/
+language = English
+key\ with\ spaces = This is the value that could be looked up with the key "key with spaces".

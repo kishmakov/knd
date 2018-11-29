@@ -1,0 +1,2 @@
+staticLibraries = libfoo.a
+libraryPaths = /opt/local/lib /usr/local/opt/curl/lib

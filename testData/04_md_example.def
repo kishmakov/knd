@@ -1,0 +1,3 @@
+compilerOpts = -DBAR=bar
+compilerOpts.linux_x64 = -DFOO=foo1
+compilerOpts.mac_x64 = -DFOO=foo2

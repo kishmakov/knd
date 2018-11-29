@@ -1,0 +1,17 @@
+headers = curl/curl.h
+headerFilter = curl/*
+
+compilerOpts.linux = -I/usr/include -I/usr/include/x86_64-linux-gnu
+linkerOpts.osx = -L/opt/local/lib -L/usr/local/opt/curl/lib -lcurl
+linkerOpts.linux = -L/usr/lib/x86_64-linux-gnu -lcurl
+
+---
+
+struct UI128 {
+    size_t data[2];
+};
+
+// Rename of MurmurHash3_x64_128 from Austin Appleby,
+// http://code.google.com/p/smhasher/wiki/MurmurHash3
+
+UI128 murmur3(const void* buffer, size_t size, UI128 seed = UI128{{0, 0}});
