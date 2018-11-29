@@ -55,7 +55,19 @@ C_SP=(u8|u|U|L)
 
 <YYINITIAL> {
   --- { yybegin(C_END); return KndTypes.DELIM; }
-  excludeDependentModules|compilerOpts|headerFilter|headers|linkerOpts|package { yybegin(D_WAITING_PLATFORM); return KndTypes.DEF_KEY_KNOWN; }
+  compilerOpts
+    | excludeDependentModules
+    | excludedFunctions
+    | headerFilter
+    | headers
+    | libraryPaths
+    | linkerOpts
+    | nonStrictEnums
+    | noStringConversion
+    | package
+    | staticLibraries
+    | strictEnums
+      { yybegin(D_WAITING_PLATFORM); return KndTypes.DEF_KEY_KNOWN; }
   {D_KEY_CHAR}+ { yybegin(D_WAITING_PLATFORM); return KndTypes.DEF_KEY_UNKNOWN; }
   {D_COMMENT} { return KndTypes.DEF_COMMENT; }
 }
