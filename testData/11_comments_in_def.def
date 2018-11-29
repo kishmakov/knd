@@ -4,5 +4,25 @@ headers = curl/curl.h fribidi/fribidi.h
 # selected headerFilter
 headerFilter = curl/* fribidi/fribidi-bidi*.h
 
+---
 
+/************************
+ * Some c comment.      *
+ * More than one line.  *
+ ************************/
 
+static inline int square(int arg) {
+    return arg * arg;
+}
+
+/* Online traditional comment */
+
+static inline int cube(int arg) {
+    return arg * arg * arg;
+}
+
+// Oneline linear comment
+
+static inline int doubling(int arg) {
+    return 2 * arg;
+}

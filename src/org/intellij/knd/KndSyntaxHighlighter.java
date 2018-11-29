@@ -45,7 +45,7 @@ public class KndSyntaxHighlighter extends SyntaxHighlighterBase {
             return KEY_KEYS;
         } else if (tokenType.equals(KndTypes.DEF_VALUE)) {
             return VALUE_KEYS;
-        } else if (tokenType.equals(KndTypes.DEF_COMMENT)) {
+        } else if (tokenType.equals(KndTypes.COMMENT)) {
             return COMMENT_KEYS;
         } else if (tokenType.equals(TokenType.BAD_CHARACTER)) {
             return BAD_CHAR_KEYS;
