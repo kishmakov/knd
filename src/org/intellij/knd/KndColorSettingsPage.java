@@ -10,11 +10,26 @@ import java.util.Map;
 
 public class KndColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Comments", KndSyntaxHighlighter.COMMENT),
-            new AttributesDescriptor("Def keywords", KndSyntaxHighlighter.DEF_KEYWORD),
-            new AttributesDescriptor("Def value", KndSyntaxHighlighter.DEF_VALUE),
-            new AttributesDescriptor("C keywords", KndSyntaxHighlighter.C_KEYWORD),
             new AttributesDescriptor("Operators", KndSyntaxHighlighter.OPERATOR),
+
+            new AttributesDescriptor("Dot", KndSyntaxHighlighter.DOT),
+            new AttributesDescriptor("Semicolon", KndSyntaxHighlighter.SEMICOLON),
+            new AttributesDescriptor("Comma", KndSyntaxHighlighter.COMMA),
+
+            new AttributesDescriptor("Braces", KndSyntaxHighlighter.BRACE),
+            new AttributesDescriptor("Brackets", KndSyntaxHighlighter.BRACKET),
+            new AttributesDescriptor("Parentheses", KndSyntaxHighlighter.PAREN),
+
+            new AttributesDescriptor("Constant", KndSyntaxHighlighter.CONSTANT),
+            new AttributesDescriptor("String literals", KndSyntaxHighlighter.STRING_LITERAL),
+
+            new AttributesDescriptor("Identifier", KndSyntaxHighlighter.IDENTIFIER),
+
+            new AttributesDescriptor("Comments", KndSyntaxHighlighter.COMMENT),
+
+            new AttributesDescriptor("Def keywords", KndSyntaxHighlighter.DEF_KEYWORD),
+            new AttributesDescriptor("C keywords", KndSyntaxHighlighter.C_KEYWORD),
+            new AttributesDescriptor("Def value", KndSyntaxHighlighter.DEF_VALUE),
     };
 
     @Nullable
