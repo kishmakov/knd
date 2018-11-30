@@ -47,18 +47,25 @@ public class KndColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "# You are reading the \".properties\" entry.\n" +
-                "! The exclamation mark can also mark text as comments.\n" +
-                "website = http://en.wikipedia.org/\n" +
-                "language = English\n" +
-                "# The backslash below tells the application to continue reading\n" +
-                "# the value onto the next line.\n" +
-                "message = Welcome to \\\n" +
-                "          Wikipedia!\n" +
-                "# Add spaces to the key\n" +
-                "key\\ with\\ spaces = This is the value that could be looked up with the key \"key with spaces\".\n" +
-                "# Unicode\n" +
-                "tab : \\u0009";
+        return "# Def known key and value\n" +
+                "headers = curl/curl.h\n" +
+                "compilerOpts.linux = -I/usr/include -I/usr/include/x86_64-linux-gnu\n" +
+                "! Def unkonwn keys\n" +
+                "Aba = caba\n" +
+                "---\n" +
+                "// C comment\n" +
+                "struct Hash {\n" +
+                "    int data[2];\n" +
+                "};\n" +
+                "\n" +
+                "inline static int strangeSum(const void* buffer, int bufferSize) {\n" +
+                "    int result = 20;\n" +
+                "    const char * stringLiteral = \"This is a string\";\n" +
+                "    for (int i = 0; i < bufferSize; ++i) {\n" +
+                "        result += stringLiteral[i % 10] == i ? (i << 1) : (i % 3);\n" +
+                "    }\n" +
+                "    return result;\n" +
+                "}\n";
     }
 
     @Nullable

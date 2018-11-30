@@ -137,7 +137,7 @@ public class KndSyntaxHighlighter extends SyntaxHighlighterBase {
             return STRING_KEYS;
         } else if (tokenType.equals(KndTypes.C_IDENTIFIER)) {
             return IDENTIFIER_KEYS;
-        } else if (tokenType.equals(KndTypes.COMMENT)) {
+        } else if (tokenType.equals(KndTypes.COMMENT) || tokenType.equals(KndTypes.DELIM)) {
             return COMMENT_KEYS;
         } else if (tokenType.equals(KndTypes.C_I_CONSTANT) || tokenType.equals(KndTypes.C_F_CONSTANT)) {
             return CONSTANT_KEYS;
